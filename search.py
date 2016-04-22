@@ -96,20 +96,20 @@ def depthFirstSearch(problem):
     """
 
 
-    print "Start:", problem.getStartState()
-    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    print "Start's successors:", problem.getSuccessors(problem.getStartState())
+    #print "Start:", problem.getStartState()
+    #print "Is the start a goal?", problem.isGoalState(problem.getStartState())
+    #print "Start's successors:", problem.getSuccessors(problem.getStartState())
     # Structure of getsuccessors: [((5, 4), 'South', 1), ((4, 5), 'West', 1)]
     #Initialization of variables
 
     dfs_tree = list()
     dfs_start = problem.getStartState()
-    dfs_frontier = [x[0] for x in problem.getSuccessors(dfs_start)]
+    dfs_frontier = list()
     dfs_visited = set()
     sol_path = list()
 
-    print "Is Stack empty? - ", not dfs_tree
-    print "Successors of Start are:",  dfs_frontier
+    #print "Is Stack empty? - ", not dfs_tree
+    #print "Successors of Start are:",  dfs_frontier
     #util.raiseNotDefined()
 
     if problem.isGoalState(dfs_start):
@@ -123,9 +123,9 @@ def depthFirstSearch(problem):
     while dfs_tree:
 
         dfs_frontier = problem.getSuccessors(current_node)
-        print "\nCurrent Frontier: ", dfs_frontier
-        print "Current Solution Path:", sol_path
-        print "Visited nodes are:", dfs_visited
+        #print "\nCurrent Frontier: ", dfs_frontier
+        #print "Current Solution Path:", sol_path
+        #print "Visited nodes are:", dfs_visited
 
         if not dfs_frontier:
             if len(dfs_visited) == 1 :
