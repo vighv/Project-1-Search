@@ -104,7 +104,7 @@ def depthFirstSearch(problem):
 
     dfs_tree = list()
     dfs_start = problem.getStartState()
-    dfs_frontier = list()
+    #dfs_frontier = list()
     dfs_visited = set()
     sol_path = list()
 
@@ -167,7 +167,70 @@ def breadthFirstSearch(problem):
     [2nd Edition: p 73, 3rd Edition: p 82]
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    #util.raiseNotDefined()
+
+    bfs_tree = list()
+    bfs_start = problem.getStartState()
+    bfs_fringe = util.Queue()
+    bfs_visited = set()
+    sol_path = list()
+
+
+    #print "Is Stack empty? - ", not dfs_tree
+    #print "Successors of Start are:",  dfs_frontier
+    #util.raiseNotDefined()
+
+    if problem.isGoalState(bfs_start):
+        print "Trivial problem! Started at the goal state"
+        return sol_path
+
+    bfs_tree.append(bfs_start)
+    current_node = bfs_start
+    bfs_visited.add(bfs_start)
+    depth_count = 1
+
+    while bfs_tree:
+
+        bfs_fringe.push(problem.getSuccessors(current_node))
+        print "\nCurrent Frontier: ", bfs_fringe
+        print "Current Solution Path:", sol_path
+        print "Visited nodes are:", bfs_visited
+
+        if not bfs_fringe:
+            if len(bfs_visited) == 1 :
+                print "No Solution! No frontier at the very start!"
+                return sol_path
+            else:
+                sol_path.pop()
+                bfs_tree.pop()
+                current_node = bfs_tree[-1]
+
+        else:
+            visit_flag = 1
+
+            for child in bfs_fringe:
+                bfs_tree.append(child[0])
+                sol_path.append(child[1])
+
+                if child[0] not in bfs_visited:
+
+                    bfs_visited.add(child[0])
+                    # visit_flag = 0
+                    if problem.isGoalState(child[0]):
+                        print "Solution found using BFS!"
+                        print "Final Solution Path:", sol_path
+                        return sol_path
+                    else:
+                        sol_path.pop()
+                        bfs_tree.pop()
+                        visit_flag = 0
+
+            if visit_flag:
+                current_node = bfs_tree[-1]
+                depth_count -= 1
+
+        depth_count += 1
+        print "Current Depth:", depth_count
 
 def uniformCostSearch(problem):
     "Search the node of least total cost first. "
